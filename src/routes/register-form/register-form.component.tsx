@@ -1,16 +1,19 @@
+import React from "react";
+import "./register-form.styles.css";
 import InputComponent from "../../components/input/input.component";
 import { useFormik } from "formik";
-import React from "react";
-import "./login-form.styles.css";
+import RadioButton from "../../components/radio-button/radio-button.component";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 
-export interface FormValues {
+interface FormValues {
   email: string;
   password: string;
+  mobile: string;
+  gender: string;
 }
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Invalid email")
@@ -18,12 +21,19 @@ const Login: React.FC = () => {
     password: Yup.string()
       .min(6, "Password must be at least 6 characters long")
       .required("Please Enter Password"),
+    mobile: Yup.string()
+      .min(10, "Mobile number must be at least 10 digits")
+      .max(10, "Mobile number must be at least 10 digits")
+      .required("Please Enter Mobile Number"),
+    gender: Yup.string().required("Please Select Gender"),
   });
 
   const formik = useFormik<FormValues>({
     initialValues: {
       email: "",
       password: "",
+      mobile: "",
+      gender: "",
     } as FormValues,
     onSubmit: (values) => {
       console.log(values);
@@ -31,7 +41,14 @@ const Login: React.FC = () => {
     validateOnBlur: true,
     validationSchema,
   });
-  const { email, password } = formik.values;
+
+  const { email, password, mobile, gender } = formik.values;
+
+  const radioButtonOptions = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+    { label: "Other", value: "other" },
+  ];
   return (
     <div className={"form-container"}>
       <div className="logo">
@@ -40,8 +57,10 @@ const Login: React.FC = () => {
           alt="logo"
         />
       </div>
-      <h1 className={"title"}>Log in to your account</h1>
-      <div className="subtitle">Welcome back! Please enter your details</div>
+      <h1 className={"title"}>Register your account</h1>
+      <div className="subtitle">
+        Register yourself! Please enter your details
+      </div>
       <form onSubmit={formik.handleSubmit} noValidate={true}>
         <InputComponent
           name={"email"}
@@ -57,17 +76,33 @@ const Login: React.FC = () => {
           type={"password"}
           formik={formik}
         />
-        <span className="register-user">
-          Don't have account? <Link to="/register">Register yourself</Link>{" "}
+        <InputComponent
+          name={"mobile"}
+          placeholder={"Enter your mobile number"}
+          label={"Mobile"}
+          type={"number"}
+          formik={formik}
+        />
+        {/*Radio button*/}
+        <RadioButton
+          nameFor={"gender"}
+          radioOptions={radioButtonOptions}
+          formik={formik}
+        />
+        <span className="login-user">
+          Already have an account? <Link to="/">Login</Link>{" "}
         </span>
         <button
-          className={`${!email || !password ? "button-disabled" : ""}`}
+          className={`${
+            !email || !password || !mobile || !gender ? "button-disabled" : ""
+          }`}
           type={"submit"}
         >
-          Login
+          Register
         </button>
       </form>
     </div>
   );
 };
-export default Login;
+
+export default Register;

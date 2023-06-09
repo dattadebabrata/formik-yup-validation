@@ -1,0 +1,18 @@
+.radio-title {
+  margin: 10px 0;
+}
+.radio-group {
+  text-align: left;
+}
+.radio-label {
+  margin-left: 5px;
+}
+.radio-option {
+  margin: 5px 0;
+}
+input[type="radio"] {
+  display: inline-block;
+  margin-right: auto;
+  text-align: left;
+  border: 1px solid red;
+}

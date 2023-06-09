@@ -23,6 +23,26 @@
   margin: 15px auto 30px auto;
 }
 
+.register-user,
+.login-user {
+  font-size: 15px;
+  color: gray;
+  margin: 15px auto 30px auto;
+  display: block;
+  text-align: left;
+  color: black;
+}
+.register-user > a,
+.login-user > a {
+  text-decoration: none;
+  transition: 500ms ease-in-out;
+}
+.register-user > a:hover,
+.login-user > a:hover {
+  text-decoration: underline;
+  letter-spacing: 1px;
+}
+
 button[type="submit"] {
   background-color: black;
   color: white;

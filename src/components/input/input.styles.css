@@ -2,8 +2,7 @@
   /*border: 1px solid red;*/
   margin-bottom: 30px;
 }
-label,
-input {
+.input-block {
   display: block;
   width: 100%;
   text-align: left;

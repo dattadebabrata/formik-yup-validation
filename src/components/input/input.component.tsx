@@ -26,9 +26,11 @@ const InputComponent: React.FC<InputProps> = ({
   };
   return (
     <div className={"form-input"}>
-      <label htmlFor={name}>{label}</label>
+      <label className={"input-block"} htmlFor={name}>
+        {label}
+      </label>
       <input
-        className={`black-border ${
+        className={`black-border input-block ${
           formik.touched.name && formik.errors.name
             ? "red-border"
             : "grey-border"
